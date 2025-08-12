@@ -8,7 +8,7 @@ Install from GitHub using:
 
 ```r
 # install.packages("remotes")
-remotes::install_github("YOUR_GITHUB_USERNAME/cantabcolors")
+remotes::install_github("xiaolong-y/cantabcolors")
 ```
 
 ## Usage
