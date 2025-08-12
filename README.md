@@ -14,7 +14,7 @@ Beautiful, natural color palettes inspired by the flora and seasons of Cambridge
 ```r
 # Install from GitHub
 # install.packages("remotes")
-remotes::install_github("YOUR_GITHUB_USERNAME/cantabcolors")
+remotes::install_github("xiaolong-y/cantabcolors")
 ```
 
 ## Palettes
@@ -371,8 +371,8 @@ Color palettes are inspired by the native and commonly observed plant species th
 
 ## License
 
-MIT © Your Name
+MIT © Xiaolong Yang
 
 ---
 
-*Created with 🍁 in Cambridge, MA*
+*Created 🍁 in LA Burdicks, Cambridge, MA*
