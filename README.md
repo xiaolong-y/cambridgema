@@ -1,7 +1,7 @@
 # cantabcolors <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/YOUR_GITHUB_USERNAME/cantabcolors/workflows/R-CMD-check/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/cantabcolors/actions)
+[![R-CMD-check](https://github.com/xiaolong-y/cantabcolors/workflows/R-CMD-check/badge.svg)](https://github.com/xiaolong-y/cantabcolors/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
