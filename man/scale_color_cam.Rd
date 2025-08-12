@@ -5,9 +5,21 @@
 \alias{scale_colour_cam}
 \title{Cambridge color scale for ggplot2}
 \usage{
-scale_color_cam(palette = "spring", discrete = TRUE, reverse = FALSE, ...)
+scale_color_cam(
+  palette = "spring",
+  discrete = TRUE,
+  reverse = FALSE,
+  na.value = cam_colors["granite"],
+  ...
+)
 
-scale_colour_cam(palette = "spring", discrete = TRUE, reverse = FALSE, ...)
+scale_colour_cam(
+  palette = "spring",
+  discrete = TRUE,
+  reverse = FALSE,
+  na.value = cam_colors["granite"],
+  ...
+)
 }
 \arguments{
 \item{palette}{Palette name: "spring", "summer", "autumn", "winter", or "river"}
@@ -15,6 +27,8 @@ scale_colour_cam(palette = "spring", discrete = TRUE, reverse = FALSE, ...)
 \item{discrete}{Logical, TRUE for discrete scale, FALSE for continuous}
 
 \item{reverse}{Logical, reverse color order if TRUE}
+
+\item{na.value}{Color used for missing values}
 
 \item{...}{Additional arguments passed to scale functions}
 }

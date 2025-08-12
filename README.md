@@ -78,6 +78,24 @@ ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   theme_minimal()
 ```
 
+### Handling Missing Values
+
+Missing data are displayed using the neutral `granite` tone by default. Use
+`na.value` to customize this colour.
+
+```r
+df_missing <- data.frame(
+  x = 1:4,
+  y = c(2, NA, 3, 4),
+  g = c("A", "B", "C", "D")
+)
+
+ggplot(df_missing, aes(x, y, color = g)) +
+  geom_point(size = 3) +
+  scale_color_cam("spring", na.value = cam_colors["snow"]) +
+  theme_minimal()
+```
+
 ## Examples for Statistical Analysis
 
 ### Causal Inference and Treatment Effects
@@ -376,3 +394,4 @@ MIT © Xiaolong Yang
 ---
 
 *Created 🍁 in LA Burdicks, Cambridge, MA*
+
