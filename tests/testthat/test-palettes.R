@@ -16,9 +16,16 @@ test_that("cam_pal interpolates beyond base length", {
 test_that("scale_color_cam returns correct scale type", {
   discrete_scale <- scale_color_cam("winter", discrete = TRUE)
   expect_s3_class(discrete_scale, "ScaleDiscrete")
-  
+
   continuous_scale <- scale_color_cam("river", discrete = FALSE)
   expect_s3_class(continuous_scale, "ScaleContinuous")
+})
+
+test_that("scale functions propagate na.value", {
+  col_scale <- scale_color_cam("spring", na.value = cam_colors["snow"])
+  expect_equal(col_scale$na.value, cam_colors["snow"])
+  fill_scale <- scale_fill_cam("spring", na.value = cam_colors["snow"])
+  expect_equal(fill_scale$na.value, cam_colors["snow"])
 })
 
 test_that("invalid palette names throw error", {

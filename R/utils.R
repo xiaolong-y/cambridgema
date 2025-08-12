@@ -17,6 +17,6 @@ plot_cam_demo <- function() {
             main = "", yaxt = "n")
     mtext(pal_name, side = 2, las = 1, line = 0.5)
   }
-  
+
   invisible(NULL)
 }
