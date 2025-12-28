@@ -1,4 +1,4 @@
 library(testthat)
-library(cantabcolors)
+library(cambridgema)
 
-test_check("cantabcolors")
+test_check("cambridgema")

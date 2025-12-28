@@ -1,0 +1,189 @@
+---
+title: "Getting Started with cambridgema"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with cambridgema}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Introduction
+
+The **cambridgema** package provides colorblind-friendly color palettes inspired
+by the flora and seasons of Cambridge, Massachusetts. All palettes are verified
+for accessibility under deuteranopia, protanopia, and tritanopia.
+
+```{r setup}
+library(cambridgema)
+library(ggplot2)
+```
+
+## Available Palettes
+
+The package includes three types of palettes:
+
+- **Categorical** (5 colors): `spring`, `summer`, `autumn`, `winter`, `river`
+- **Sequential** (7 colors): `crimson_seq`, `river_seq`, `foliage_seq`
+- **Diverging** (9 colors): `crimson_blue`, `brick_pine`
+
+```{r list-palettes}
+list_palettes()
+```
+
+## Viewing Palettes
+
+Use `plot_cam_demo()` to see all palettes:
+
+```{r demo, fig.height=8}
+plot_cam_demo()
+```
+
+Or view details of a specific palette:
+
+```{r print-palette}
+print_palette("autumn")
+```
+
+## Basic Usage
+
+### Access Individual Colors
+
+The `cam_colors` vector contains all 50+ named colors:
+
+```{r individual}
+# Access specific colors
+cam_colors["maple_red"]
+cam_colors[c("spring_blossom", "charles_blue", "goldenrod")]
+```
+
+### Get n Colors from a Palette
+
+Use `cam_cols()` to get exactly n colors:
+
+```{r cam-cols}
+# Get 5 autumn colors
+cam_cols(5, "autumn")
+
+# Get 10 colors (interpolated if palette has fewer)
+cam_cols(10, "river_seq")
+```
+
+### Base R Plotting
+
+```{r base-r, fig.height=4}
+barplot(c(3, 7, 9, 6, 2),
+        col = cam_cols(5, "autumn"),
+        main = "Autumn in Cambridge",
+        names.arg = c("A", "B", "C", "D", "E"))
+```
+
+## ggplot2 Integration
+
+### Discrete (Categorical) Scales
+
+Use `scale_color_cam()` and `scale_fill_cam()` for ggplot2:
+
+```{r discrete, fig.height=4}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  scale_color_cam("autumn") +
+  labs(title = "Iris Data with Autumn Palette") +
+  theme_minimal()
+```
+
+```{r fill, fig.height=4}
+ggplot(mpg, aes(class, fill = class)) +
+  geom_bar() +
+  scale_fill_cam("summer") +
+  labs(title = "Car Classes with Summer Palette") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Continuous Scales
+
+For continuous data, use `discrete = FALSE`:
+
+```{r continuous, fig.height=4}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  scale_fill_cam("river_seq", discrete = FALSE) +
+  labs(title = "Old Faithful with River Sequential Palette") +
+  theme_minimal()
+```
+
+### Diverging Scales
+
+Diverging palettes automatically center on zero - perfect for correlations:
+
+```{r diverging, fig.height=5}
+# Create correlation matrix
+cor_mat <- cor(mtcars[, 1:6])
+cor_df <- as.data.frame(as.table(cor_mat))
+names(cor_df) <- c("Var1", "Var2", "value")
+
+ggplot(cor_df, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_cam("crimson_blue") +
+  labs(title = "Correlation Matrix with Crimson-Blue Diverging Palette") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Reversing Palettes
+
+All functions support the `reverse` parameter:
+
+```{r reverse, fig.height=4}
+# Normal order
+ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_cam("spring") +
+  labs(title = "Spring Palette (Normal Order)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r reverse2, fig.height=4}
+# Reversed order
+ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_cam("spring", reverse = TRUE) +
+  labs(title = "Spring Palette (Reversed)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Handling Missing Values
+
+Missing data uses neutral `granite_gray` by default. Customize with `na.value`:
+
+```{r missing, fig.height=4}
+df <- data.frame(
+  x = 1:5,
+  y = c(2, 3, NA, 4, 5),
+  g = c("A", "B", "C", "D", "E")
+)
+
+ggplot(df, aes(x, y, color = g)) +
+  geom_point(size = 5) +
+  scale_color_cam("spring", na.value = "#F0F5F9") +
+  labs(title = "Missing Value Shown in Snow White") +
+  theme_minimal()
+```
+
+## Next Steps
+
+- Check the **Colorblind Accessibility** vignette for CVD simulation
+- Explore the **Cambridge Inspiration** vignette for the story behind each color
+- Visit the [pkgdown site](https://xiaolong-y.github.io/cambridgema/) for full documentation

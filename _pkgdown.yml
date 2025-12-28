@@ -1,0 +1,42 @@
+url: https://xiaolong-y.github.io/cambridgema/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+
+reference:
+  - title: Color Palettes
+    desc: Functions for accessing Cambridge-inspired color palettes
+    contents:
+      - cam_colors
+      - cam_palette
+      - cam_pal
+      - cam_cols
+
+  - title: ggplot2 Scales
+    desc: Color and fill scales for ggplot2
+    contents:
+      - scale_color_cam
+      - scale_colour_cam
+      - scale_fill_cam
+
+  - title: Accessibility
+    desc: Colorblind accessibility tools
+    contents:
+      - check_colorblind
+      - plot_colorblind_sim
+
+  - title: Visualization
+    desc: Functions for visualizing palettes
+    contents:
+      - plot_cam_demo
+
+figures:
+  dev: ragg::agg_png
+  dpi: 150
+  fig.ext: png

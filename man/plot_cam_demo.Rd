@@ -10,7 +10,8 @@ plot_cam_demo()
 NULL (displays plot)
 }
 \description{
-Shows a swatch panel of all available Cambridge palettes
+Shows a swatch panel of all available Cambridge palettes, organized
+by type: categorical, sequential, and diverging.
 }
 \examples{
 plot_cam_demo()

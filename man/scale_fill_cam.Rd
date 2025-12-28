@@ -8,31 +8,51 @@ scale_fill_cam(
   palette = "spring",
   discrete = TRUE,
   reverse = FALSE,
-  na.value = cam_colors["granite"],
+  na.value = "#5A5A5A",
   ...
 )
 }
 \arguments{
-\item{palette}{Palette name: "spring", "summer", "autumn", "winter", or "river"}
+\item{palette}{Palette name. Categorical: "spring", "summer", "autumn",
+"winter", "river". Sequential: "crimson_seq", "river_seq", "foliage_seq".
+Diverging: "crimson_blue", "brick_pine".}
 
-\item{discrete}{Logical, TRUE for discrete scale, FALSE for continuous}
+\item{discrete}{Logical, TRUE for discrete scale, FALSE for continuous.
+Ignored for diverging palettes which are always continuous.}
 
 \item{reverse}{Logical, reverse color order if TRUE}
 
-\item{na.value}{Color used for missing values}
+\item{na.value}{Color used for missing values. Default is granite gray (#5A5A5A).}
 
-\item{...}{Additional arguments passed to scale functions}
+\item{...}{Additional arguments passed to ggplot2 scale functions}
 }
 \value{
 ggplot2 scale object
 }
 \description{
-Cambridge fill scale for ggplot2
+Apply Cambridge, MA inspired color palettes to fill aesthetics.
+See \code{\link{scale_color_cam}} for details.
 }
 \examples{
 library(ggplot2)
+
+# Bar chart with categorical palette
 ggplot(mpg, aes(class, fill = class)) +
   geom_bar() +
   scale_fill_cam("summer") +
   theme(legend.position = "none")
+
+# Heatmap with sequential palette
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  scale_fill_cam("foliage_seq", discrete = FALSE)
+
+# Correlation matrix with diverging palette
+cor_data <- data.frame(
+  x = rep(1:3, 3), y = rep(1:3, each = 3),
+  r = c(1, 0.5, -0.3, 0.5, 1, 0.8, -0.3, 0.8, 1)
+)
+ggplot(cor_data, aes(x, y, fill = r)) +
+  geom_tile() +
+  scale_fill_cam("crimson_blue")
 }

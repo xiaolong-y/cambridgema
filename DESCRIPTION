@@ -1,22 +1,37 @@
-Package: cantabcolors
+Package: cambridgema
 Type: Package
 Title: Cambridge, MA Inspired Color Palettes for R
-Version: 0.1.0
-Authors@R: person("Your", "Name", email = "your.email@example.com", 
+Version: 0.2.0
+Authors@R: person("Xiaolong", "Yang",
+                  email = "xiaolong.yang@example.com",
                   role = c("aut", "cre"))
-Description: Provides color palettes inspired by native and commonly observed 
-    species in Cambridge, Massachusetts. Features seasonal palettes reflecting 
-    Fresh Pond, Cambridge Common, and Charles River flora through the year. 
-    Includes discrete and continuous scales for ggplot2 plus base R helpers 
-    for easy integration with any plotting workflow.
+Author: Xiaolong Yang [aut, cre]
+Maintainer: Xiaolong Yang <xiaolong.yang@example.com>
+Description: Provides colorblind-friendly color palettes inspired by the flora
+    and seasons of Cambridge, Massachusetts. Features seasonal palettes
+    reflecting Fresh Pond, Cambridge Common, and Charles River flora through
+    the year. All palettes are verified for accessibility under deuteranopia,
+    protanopia, and tritanopia. Includes discrete and continuous scales for
+    ggplot2 plus base R helpers for easy integration with any plotting workflow.
 License: MIT + file LICENSE
+URL: https://github.com/xiaolong-y/cambridgema,
+    https://xiaolong-y.github.io/cambridgema
+BugReports: https://github.com/xiaolong-y/cambridgema/issues
 Encoding: UTF-8
-LazyData: true
-Imports: 
-    ggplot2,
-    grDevices
-Suggests: 
-    testthat (>= 3.0.0)
+Imports:
+    ggplot2 (>= 3.0.0),
+    grDevices,
+    graphics,
+    methods
+Suggests:
+    testthat (>= 3.0.0),
+    colorspace,
+    colorblindcheck,
+    covr,
+    knitr,
+    rmarkdown,
+    patchwork
 Config/testthat/edition: 3
+VignetteBuilder: knitr
 RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)

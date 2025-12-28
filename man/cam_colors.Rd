@@ -5,16 +5,28 @@
 \alias{cam_colors}
 \title{Cambridge MA Color Palettes}
 \format{
-An object of class \code{character} of length 23.
+A named character vector of hex color codes
 }
 \usage{
 cam_colors
 }
 \description{
-Named vector of all Cambridge-inspired colors
+Named vector of all Cambridge-inspired colors. Each color is chosen for
+colorblind accessibility with sufficient contrast and luminance variation.
+}
+\details{
+Colors are organized by season and inspired by Cambridge, MA flora and landmarks:
+\describe{
+\item{Spring}{Cherry blossoms, maple flowers, fresh leaves at Fresh Pond}
+\item{Summer}{Wildflowers at Cambridge Common - cardinal flower, milkweed, bergamot}
+\item{Autumn}{Fall foliage in Harvard Yard - asters, goldenrod, maple leaves}
+\item{Winter}{Evergreens and snow along the Charles River}
+\item{River}{The Charles River through the seasons}
+}
 }
 \examples{
-cam_colors["red_maple_flower"]
-cam_colors[c("snow", "granite")]
+cam_colors["maple_red"]
+cam_colors[c("snow_white", "granite_gray")]
+names(cam_colors)
 }
 \keyword{datasets}

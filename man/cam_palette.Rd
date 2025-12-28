@@ -7,7 +7,12 @@
 cam_palette(name = "spring", reverse = FALSE)
 }
 \arguments{
-\item{name}{Palette name: "spring", "summer", "autumn", "winter", or "river"}
+\item{name}{Palette name. Options:
+\itemize{
+\item Categorical (5 colors): "spring", "summer", "autumn", "winter", "river"
+\item Sequential (7 colors): "crimson_seq", "river_seq", "foliage_seq"
+\item Diverging (9 colors): "crimson_blue", "brick_pine"
+}}
 
 \item{reverse}{Logical, reverse color order if TRUE}
 }
@@ -15,9 +20,17 @@ cam_palette(name = "spring", reverse = FALSE)
 Named character vector of hex colors
 }
 \description{
-Returns hex colors for a specified Cambridge palette
+Returns hex colors for a specified Cambridge palette. All palettes are
+designed to be colorblind-friendly with sufficient contrast.
 }
 \examples{
 cam_palette("spring")
 cam_palette("autumn", reverse = TRUE)
+cam_palette("crimson_seq")  # 7-color sequential
+cam_palette("crimson_blue") # 9-color diverging
+}
+\seealso{
+\code{\link{cam_pal}} for a function generator,
+\code{\link{cam_cols}} for directly getting n colors,
+\code{\link{list_palettes}} for all available palettes
 }
