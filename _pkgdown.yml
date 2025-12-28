@@ -17,6 +17,7 @@ reference:
       - cam_palette
       - cam_pal
       - cam_cols
+      - list_palettes
 
   - title: ggplot2 Scales
     desc: Color and fill scales for ggplot2
@@ -28,13 +29,16 @@ reference:
   - title: Accessibility
     desc: Colorblind accessibility tools
     contents:
+      - colorblind
       - check_colorblind
       - plot_colorblind_sim
+      - simulate_cvd
 
   - title: Visualization
-    desc: Functions for visualizing palettes
+    desc: Functions for visualizing and printing palettes
     contents:
       - plot_cam_demo
+      - print_palette
 
 figures:
   dev: ragg::agg_png
