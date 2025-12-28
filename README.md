@@ -38,7 +38,23 @@ remotes::install_github("xiaolong-y/cambridgema")
 plot_cam_demo()
 ```
 
-![](man/figures/all_palettes.png)
+<p align="center">
+  <img src="figures/all_palettes.png" alt="All Cambridge MA Palettes" width="700">
+</p>
+
+### Individual Palette Cards
+
+<p align="center">
+  <img src="man/figures/palette_spring.png" alt="Spring Palette" width="400">
+  <img src="man/figures/palette_summer.png" alt="Summer Palette" width="400">
+</p>
+<p align="center">
+  <img src="man/figures/palette_autumn.png" alt="Autumn Palette" width="400">
+  <img src="man/figures/palette_winter.png" alt="Winter Palette" width="400">
+</p>
+<p align="center">
+  <img src="man/figures/palette_river.png" alt="River Palette" width="400">
+</p>
 
 ### Palette Types
 
@@ -55,6 +71,12 @@ plot_cam_demo()
 - **`autumn`** - Asters, goldenrod, and maple leaves from Harvard Yard
 - **`winter`** - Holly, pine, snow, and granite from the Charles River Esplanade
 - **`river`** - Charles River blues through the seasons
+
+## Default vs cambridgema Comparison
+
+<p align="center">
+  <img src="man/figures/color_comparison.png" alt="Default ggplot2 vs cambridgema colors" width="700">
+</p>
 
 ## Colorblind Accessibility
 
@@ -82,7 +104,7 @@ check_colorblind("autumn")
 plot_colorblind_sim("autumn")
 ```
 
-![](man/figures/colorblind/autumn_cvd.png)
+> *CVD simulation shows how palettes appear to people with deuteranopia (~6% of males), protanopia (~2% of males), and tritanopia (rare).*
 
 ## Usage Examples
 
@@ -106,7 +128,9 @@ ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   theme_minimal()
 ```
 
-![](man/figures/examples/heatmap.png)
+<p align="center">
+  <img src="figures/heatmap.png" alt="Heatmap with River Sequential Palette" width="600">
+</p>
 
 ### Centered Data (Diverging Scales)
 
@@ -158,50 +182,60 @@ ggplot(df, aes(x, y, color = g)) +
 
 ## Statistical Analysis Examples
 
-### Forest Plot (Treatment Effects)
+The package includes colors optimized for common statistical visualizations:
 
+### Visualization Gallery
+
+<p align="center">
+  <img src="figures/forest_plot.png" alt="Forest Plot - Treatment Effects" width="400">
+  <img src="figures/roc_curve.png" alt="ROC Curve" width="400">
+</p>
+
+<p align="center">
+  <img src="figures/timeseries.png" alt="Time Series with Confidence Bands" width="600">
+</p>
+
+<p align="center">
+  <img src="figures/balance_check.png" alt="Covariate Balance Check" width="400">
+  <img src="figures/variable_importance.png" alt="Variable Importance" width="400">
+</p>
+
+<p align="center">
+  <img src="figures/rd_plot.png" alt="Regression Discontinuity Design" width="400">
+  <img src="figures/did_plot.png" alt="Difference-in-Differences" width="400">
+</p>
+
+### Example Code
+
+**Forest Plot (Treatment Effects)**
 ```r
-library(dplyr)
-
-# Subgroup effects with confidence intervals
 ggplot(effects, aes(x = subgroup, y = effect, color = subgroup)) +
   geom_hline(yintercept = 0, linetype = "dashed", alpha = 0.5) +
   geom_point(size = 4) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   scale_color_cam("autumn") +
-  labs(title = "Heterogeneous Treatment Effects") +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
-
-![](man/figures/examples/forest_plot.png)
-
-### ROC Curve
-
-```r
-ggplot(roc_data, aes(x = fpr, y = tpr)) +
-  geom_abline(linetype = "dashed", alpha = 0.5) +
-  geom_line(color = cam_colors["aster_purple"], linewidth = 1.5) +
-  geom_area(alpha = 0.2, fill = cam_colors["aster_purple"]) +
-  labs(title = "ROC Curve", x = "FPR", y = "TPR") +
-  coord_equal() +
+  coord_flip() +
   theme_minimal()
 ```
 
-![](man/figures/examples/roc_curve.png)
-
-### Time Series with Confidence Bands
-
+**Time Series with Confidence Bands**
 ```r
 ggplot(df_ts, aes(x = date)) +
   geom_ribbon(aes(ymin = lower, ymax = upper),
               fill = cam_colors["river_sky"], alpha = 0.3) +
   geom_line(aes(y = value), color = cam_colors["charles_blue"], linewidth = 1.5) +
-  labs(title = "Time Series with 95% CI") +
   theme_minimal()
 ```
 
-![](man/figures/examples/timeseries.png)
+**ROC Curve**
+```r
+ggplot(roc_data, aes(x = fpr, y = tpr)) +
+  geom_abline(linetype = "dashed", alpha = 0.5) +
+  geom_area(fill = cam_colors["aster_purple"], alpha = 0.2) +
+  geom_line(color = cam_colors["aster_purple"], linewidth = 1.5) +
+  coord_equal() +
+  theme_minimal()
+```
 
 ## Color Reference
 
