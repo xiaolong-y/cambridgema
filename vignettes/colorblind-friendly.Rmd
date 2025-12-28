@@ -16,18 +16,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Why Colorblind Accessibility Matters
-
-Approximately 8% of males and 0.5% of females have some form of color vision
-deficiency (CVD). The most common types are:
-
-- **Deuteranopia** (~6% of males): Reduced sensitivity to green light
-- **Protanopia** (~2% of males): Reduced sensitivity to red light
-- **Tritanopia** (rare): Reduced sensitivity to blue light
-
-Creating accessible visualizations ensures your data communicates effectively
-to all audiences.
-
 ```{r setup}
 library(cambridgema)
 library(ggplot2)
