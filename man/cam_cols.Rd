@@ -9,7 +9,7 @@ cam_cols(n, palette = "spring", reverse = FALSE)
 \arguments{
 \item{n}{Number of colors needed}
 
-\item{palette}{Palette name: "spring", "summer", "autumn", "winter", or "river"}
+\item{palette}{Palette name (see \code{\link{cam_palette}} for options)}
 
 \item{reverse}{Logical, reverse color order if TRUE}
 }
@@ -17,9 +17,20 @@ cam_cols(n, palette = "spring", reverse = FALSE)
 Character vector of n hex colors
 }
 \description{
-Base R helper to get n colors from a Cambridge palette
+Base R helper to get n colors from a Cambridge palette.
+Useful for base R plotting functions.
 }
 \examples{
-cam_cols(3, "spring")
+# Get 5 autumn colors for a barplot
 barplot(1:5, col = cam_cols(5, "autumn"))
+
+# Get 3 spring colors
+cam_cols(3, "spring")
+
+# Get 10 colors from sequential palette
+cam_cols(10, "river_seq")
+}
+\seealso{
+\code{\link{cam_palette}} for getting raw palette colors,
+\code{\link{cam_pal}} for a function generator
 }

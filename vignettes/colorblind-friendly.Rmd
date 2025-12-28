@@ -1,0 +1,179 @@
+---
+title: "Colorblind-Friendly Visualization"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Colorblind-Friendly Visualization}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+## Why Colorblind Accessibility Matters
+
+Approximately 8% of males and 0.5% of females have some form of color vision
+deficiency (CVD). The most common types are:
+
+- **Deuteranopia** (~6% of males): Reduced sensitivity to green light
+- **Protanopia** (~2% of males): Reduced sensitivity to red light
+- **Tritanopia** (rare): Reduced sensitivity to blue light
+
+Creating accessible visualizations ensures your data communicates effectively
+to all audiences.
+
+```{r setup}
+library(cambridgema)
+library(ggplot2)
+```
+
+## Checking Palette Accessibility
+
+Use `check_colorblind()` to verify any palette:
+
+```{r check}
+check_colorblind("autumn")
+```
+The function reports:
+
+- **Normal vision distance**: How distinguishable colors are under normal vision
+- **CVD distances**: Distinguishability under each type of color blindness
+- **Pass/Fail**: Whether the palette meets accessibility thresholds
+
+## Simulating Color Vision Deficiency
+
+The `plot_colorblind_sim()` function shows how palettes appear under different
+types of CVD:
+
+```{r simulate, fig.height=6}
+plot_colorblind_sim("autumn")
+```
+
+You can also simulate individual colors:
+
+```{r simulate-colors, eval=requireNamespace("colorspace", quietly = TRUE)}
+# Get autumn colors
+autumn_cols <- cam_palette("autumn")
+autumn_cols
+
+# Simulate deuteranopia
+simulate_cvd(autumn_cols, "deuteranopia")
+```
+
+## Design Principles
+
+All cambridgema palettes are designed with these accessibility principles:
+
+### 1. Luminance Variation
+
+Colors in each palette have distinct brightness levels, making them
+distinguishable even in grayscale:
+
+```{r luminance, fig.height=3}
+# The autumn palette has varied luminance
+barplot(rep(1, 5), col = cam_palette("autumn"), border = NA,
+        main = "Autumn Palette - Note Varying Brightness")
+```
+
+### 2. Avoiding Problematic Combinations
+
+We avoid pure red-green pairs that are indistinguishable under deuteranopia
+and protanopia. The `brick_pine` diverging palette specifically addresses this:
+
+```{r brick-pine, fig.height=4}
+# brick_pine is designed to be CVD-safe
+check_colorblind("brick_pine")
+```
+
+### 3. Sufficient Color Distance
+
+Colors maintain a minimum CIE LAB distance of 10 units, ensuring they remain
+distinguishable under CVD simulation.
+
+## Best Practices
+
+### Pair Color with Other Visual Encodings
+
+Don't rely on color alone. Combine with:
+
+- **Shapes**: Use different point shapes for groups
+- **Line types**: Use solid, dashed, dotted lines
+- **Labels**: Add direct labels when possible
+
+```{r shapes, fig.height=4}
+ggplot(iris, aes(Sepal.Width, Sepal.Length,
+                 color = Species, shape = Species)) +
+  geom_point(size = 3) +
+  scale_color_cam("autumn") +
+  labs(title = "Color + Shape Encoding") +
+  theme_minimal()
+```
+
+### Use Sequential Palettes for Ordered Data
+
+Sequential palettes like `river_seq` and `foliage_seq` use luminance gradients
+that work well under CVD:
+
+```{r sequential, fig.height=4}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  scale_fill_cam("river_seq", discrete = FALSE) +
+  labs(title = "Sequential Palette - Works Under CVD") +
+  theme_minimal()
+```
+
+### Use Diverging Palettes for Centered Data
+
+For data with a meaningful center point (like correlations), use diverging
+palettes. The `crimson_blue` palette provides good contrast:
+
+```{r diverging, fig.height=4}
+cor_mat <- cor(mtcars[, 1:5])
+cor_df <- as.data.frame(as.table(cor_mat))
+names(cor_df) <- c("Var1", "Var2", "r")
+
+ggplot(cor_df, aes(Var1, Var2, fill = r)) +
+  geom_tile() +
+  scale_fill_cam("crimson_blue") +
+  labs(title = "Diverging Palette for Correlations") +
+  theme_minimal()
+```
+
+## Checking Your Own Colors
+
+You can check any set of colors:
+
+```{r custom}
+# Check custom colors
+my_colors <- c("#1B9E77", "#D95F02", "#7570B3", "#E7298A")
+check_colorblind(my_colors)
+```
+
+## Comparing Palettes
+
+Check all cambridgema palettes:
+
+```{r compare}
+# Check all categorical palettes
+for (pal in list_palettes()$categorical) {
+  result <- check_colorblind(pal)
+  cat(sprintf("%s: %s (normal: %.1f, deutan: %.1f)\n",
+              pal,
+              ifelse(result$passes, "PASS", "FAIL"),
+              result$normal,
+              result$deuteranopia))
+}
+```
+
+## Resources
+
+- [Coblis Color Blindness Simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/)
+- [Colorblindr R Package](https://github.com/clauswilke/colorblindr)
+- [Colorspace Package](https://colorspace.r-forge.r-project.org/)
+- [Paul Tol's Color Schemes](https://personal.sron.nl/~pault/)

@@ -7,7 +7,7 @@
 cam_pal(palette = "spring", reverse = FALSE)
 }
 \arguments{
-\item{palette}{Palette name: "spring", "summer", "autumn", "winter", or "river"}
+\item{palette}{Palette name (see \code{\link{cam_palette}} for options)}
 
 \item{reverse}{Logical, reverse color order if TRUE}
 }
@@ -15,10 +15,20 @@ cam_pal(palette = "spring", reverse = FALSE)
 Function that takes n and returns n hex colors
 }
 \description{
-Returns a function that generates n colors from a palette
+Returns a function that generates n colors from a palette.
+If n exceeds the palette size, colors are interpolated using
+\code{\link[grDevices]{colorRampPalette}}.
 }
 \examples{
+# Create a palette function
 spring_pal <- cam_pal("spring")
-spring_pal(3)
+spring_pal(3)  # Get 3 colors
+spring_pal(10) # Get 10 colors (interpolated)
+
+# One-liner
 cam_pal("autumn")(7)
+}
+\seealso{
+\code{\link{cam_palette}} for getting raw palette colors,
+\code{\link{cam_cols}} for directly getting n colors
 }
