@@ -7,12 +7,11 @@ Authors@R: person("Xiaolong", "Yang",
                   role = c("aut", "cre"))
 Author: Xiaolong Yang [aut, cre]
 Maintainer: Xiaolong Yang <xiaolong.yang@example.com>
-Description: Provides colorblind-friendly color palettes inspired by the flora
-    and seasons of Cambridge, Massachusetts. Features seasonal palettes
-    reflecting Fresh Pond, Cambridge Common, and Charles River flora through
-    the year. All palettes are verified for accessibility under deuteranopia,
-    protanopia, and tritanopia. Includes discrete and continuous scales for
-    ggplot2 plus base R helpers for easy integration with any plotting workflow.
+Description: Nature-inspired color palettes based on the flora and seasons of
+    Cambridge, Massachusetts. Features seasonal palettes reflecting Fresh Pond,
+    Cambridge Common, and Charles River flora through the year. Includes
+    discrete and continuous scales for ggplot2 plus base R helpers for easy
+    integration with any plotting workflow.
 License: MIT + file LICENSE
 URL: https://github.com/xiaolong-y/cambridgema,
     https://xiaolong-y.github.io/cambridgema

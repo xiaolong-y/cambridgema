@@ -1,8 +1,8 @@
 ---
-title: "Colorblind-Friendly Visualization"
+title: "cambridgema vs ggplot2 Default Colors"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Colorblind-Friendly Visualization}
+  %\VignetteIndexEntry{cambridgema vs ggplot2 Default Colors}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,78 +21,153 @@ library(cambridgema)
 library(ggplot2)
 ```
 
-## Checking Palette Accessibility
+## Side-by-Side Comparisons
 
-Use `check_colorblind()` to verify any palette:
+This vignette demonstrates the visual differences between ggplot2's default
+color scales and cambridgema palettes across common plot types.
 
-```{r check}
-check_colorblind("autumn")
-```
-The function reports:
+### Scatter Plot: Categorical Colors
 
-- **Normal vision distance**: How distinguishable colors are under normal vision
-- **CVD distances**: Distinguishability under each type of color blindness
-- **Pass/Fail**: Whether the palette meets accessibility thresholds
+**ggplot2 Default**
 
-## Simulating Color Vision Deficiency
-
-The `plot_colorblind_sim()` function shows how palettes appear under different
-types of CVD:
-
-```{r simulate, fig.height=6}
-plot_colorblind_sim("autumn")
+```{r scatter-default, fig.height=4}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  labs(title = "ggplot2 Default Colors") +
+  theme_minimal()
 ```
 
-You can also simulate individual colors:
+**cambridgema autumn**
 
-```{r simulate-colors, eval=requireNamespace("colorspace", quietly = TRUE)}
-# Get autumn colors
-autumn_cols <- cam_palette("autumn")
-autumn_cols
-
-# Simulate deuteranopia
-simulate_cvd(autumn_cols, "deuteranopia")
+```{r scatter-cam, fig.height=4}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  scale_color_cam("autumn") +
+  labs(title = "cambridgema: autumn palette") +
+  theme_minimal()
 ```
 
-## Design Principles
+### Bar Chart: Fill Colors
 
-All cambridgema palettes are designed with these accessibility principles:
+**ggplot2 Default**
 
-### 1. Luminance Variation
-
-Colors in each palette have distinct brightness levels, making them
-distinguishable even in grayscale:
-
-```{r luminance, fig.height=3}
-# The autumn palette has varied luminance
-barplot(rep(1, 5), col = cam_palette("autumn"), border = NA,
-        main = "Autumn Palette - Note Varying Brightness")
+```{r bar-default, fig.height=4}
+ggplot(mpg, aes(class, fill = class)) +
+  geom_bar() +
+  labs(title = "ggplot2 Default Colors") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-### 2. Avoiding Problematic Combinations
+**cambridgema summer**
 
-We avoid pure red-green pairs that are indistinguishable under deuteranopia
-and protanopia. The `brick_pine` diverging palette specifically addresses this:
-
-```{r brick-pine, fig.height=4}
-# brick_pine is designed to be CVD-safe
-check_colorblind("brick_pine")
+```{r bar-cam, fig.height=4}
+ggplot(mpg, aes(class, fill = class)) +
+  geom_bar() +
+  scale_fill_cam("summer") +
+  labs(title = "cambridgema: summer palette") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-### 3. Sufficient Color Distance
+### Heatmap: Sequential Colors
 
-Colors maintain a minimum CIE LAB distance of 10 units, ensuring they remain
-distinguishable under CVD simulation.
+**ggplot2 Default**
 
-## Best Practices
+```{r heat-default, fig.height=4}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  labs(title = "ggplot2 Default Sequential") +
+  theme_minimal()
+```
 
-### Pair Color with Other Visual Encodings
+**cambridgema river_seq**
 
-Don't rely on color alone. Combine with:
+```{r heat-cam, fig.height=4}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  scale_fill_cam("river_seq", discrete = FALSE) +
+  labs(title = "cambridgema: river_seq palette") +
+  theme_minimal()
+```
 
-- **Shapes**: Use different point shapes for groups
-- **Line types**: Use solid, dashed, dotted lines
-- **Labels**: Add direct labels when possible
+### Correlation Matrix: Diverging Colors
+
+**ggplot2 Default**
+
+```{r cor-default, fig.height=5}
+cor_mat <- cor(mtcars[, 1:6])
+cor_df <- as.data.frame(as.table(cor_mat))
+names(cor_df) <- c("Var1", "Var2", "value")
+
+ggplot(cor_df, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  labs(title = "ggplot2 Default") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+**cambridgema crimson_blue**
+
+```{r cor-cam, fig.height=5}
+ggplot(cor_df, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_cam("crimson_blue") +
+  labs(title = "cambridgema: crimson_blue palette") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Box Plot: Group Comparisons
+
+**ggplot2 Default**
+
+```{r box-default, fig.height=4}
+ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  labs(title = "ggplot2 Default Colors") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+**cambridgema spring**
+
+```{r box-cam, fig.height=4}
+ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_cam("spring") +
+  labs(title = "cambridgema: spring palette") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Palette Overview
+
+View all available palettes:
+
+```{r demo, fig.height=8}
+plot_cam_demo()
+```
+
+## Choosing a Palette
+
+| Data Type | Recommended Palettes |
+|-----------|---------------------|
+| Categorical (3-5 groups) | `spring`, `summer`, `autumn`, `winter`, `river` |
+| Sequential (continuous) | `river_seq`, `crimson_seq`, `foliage_seq` |
+| Diverging (centered on zero) | `crimson_blue`, `brick_pine` |
+
+### Quick Reference
+
+```{r list}
+list_palettes()
+```
+
+## Combining Color with Shape
+
+For maximum clarity, pair color with other visual encodings:
 
 ```{r shapes, fig.height=4}
 ggplot(iris, aes(Sepal.Width, Sepal.Length,
@@ -103,65 +178,16 @@ ggplot(iris, aes(Sepal.Width, Sepal.Length,
   theme_minimal()
 ```
 
-### Use Sequential Palettes for Ordered Data
+## Accessibility Tools
 
-Sequential palettes like `river_seq` and `foliage_seq` use luminance gradients
-that work well under CVD:
+Check color distinguishability for any palette:
 
-```{r sequential, fig.height=4}
-ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
-  geom_tile() +
-  scale_fill_cam("river_seq", discrete = FALSE) +
-  labs(title = "Sequential Palette - Works Under CVD") +
-  theme_minimal()
+```{r check}
+check_colorblind("autumn")
 ```
 
-### Use Diverging Palettes for Centered Data
+Visualize how a palette appears under different viewing conditions:
 
-For data with a meaningful center point (like correlations), use diverging
-palettes. The `crimson_blue` palette provides good contrast:
-
-```{r diverging, fig.height=4}
-cor_mat <- cor(mtcars[, 1:5])
-cor_df <- as.data.frame(as.table(cor_mat))
-names(cor_df) <- c("Var1", "Var2", "r")
-
-ggplot(cor_df, aes(Var1, Var2, fill = r)) +
-  geom_tile() +
-  scale_fill_cam("crimson_blue") +
-  labs(title = "Diverging Palette for Correlations") +
-  theme_minimal()
+```{r sim, fig.height=6}
+plot_colorblind_sim("autumn")
 ```
-
-## Checking Your Own Colors
-
-You can check any set of colors:
-
-```{r custom}
-# Check custom colors
-my_colors <- c("#1B9E77", "#D95F02", "#7570B3", "#E7298A")
-check_colorblind(my_colors)
-```
-
-## Comparing Palettes
-
-Check all cambridgema palettes:
-
-```{r compare}
-# Check all categorical palettes
-for (pal in list_palettes()$categorical) {
-  result <- check_colorblind(pal)
-  cat(sprintf("%s: %s (normal: %.1f, deutan: %.1f)\n",
-              pal,
-              ifelse(result$passes, "PASS", "FAIL"),
-              result$normal,
-              result$deuteranopia))
-}
-```
-
-## Resources
-
-- [Coblis Color Blindness Simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/)
-- [Colorblindr R Package](https://github.com/clauswilke/colorblindr)
-- [Colorspace Package](https://colorspace.r-forge.r-project.org/)
-- [Paul Tol's Color Schemes](https://personal.sron.nl/~pault/)
