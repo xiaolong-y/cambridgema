@@ -34,7 +34,7 @@ remotes::install_github("xiaolong-y/cambridgema")
 plot_cam_demo()
 ```
 
-![All Cambridge MA Palettes](figures/all_palettes.png)
+![All Cambridge MA Palettes](reference/figures/all_palettes.png)
 
 ### Individual Palette Cards
 
@@ -106,7 +106,7 @@ ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   theme_minimal()
 ```
 
-![Heatmap with River Sequential Palette](figures/heatmap.png)
+![Heatmap with River Sequential Palette](reference/figures/heatmap.png)
 
 ### Centered Data (Diverging Scales)
 
@@ -164,16 +164,18 @@ visualizations:
 
 ### Visualization Gallery
 
-![Forest Plot - Treatment Effects](figures/forest_plot.png)![ROC
-Curve](figures/roc_curve.png)
+![Forest Plot - Treatment
+Effects](reference/figures/forest_plot.png)![ROC
+Curve](reference/figures/roc_curve.png)
 
-![Time Series with Confidence Bands](figures/timeseries.png)
+![Time Series with Confidence Bands](reference/figures/timeseries.png)
 
-![Covariate Balance Check](figures/balance_check.png)![Variable
-Importance](figures/variable_importance.png)
+![Covariate Balance
+Check](reference/figures/balance_check.png)![Variable
+Importance](reference/figures/variable_importance.png)
 
 ![Regression Discontinuity
-Design](figures/rd_plot.png)![Difference-in-Differences](figures/did_plot.png)
+Design](reference/figures/rd_plot.png)![Difference-in-Differences](reference/figures/did_plot.png)
 
 ### Example Code
 
