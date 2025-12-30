@@ -1,13 +1,10 @@
 # cambridgema
 
-**Colorblind-friendly color palettes inspired by Cambridge,
-Massachusetts**
+**Nature-inspired color palettes for data visualization**
 
-Beautiful, nature-inspired color palettes designed for data
-visualization. All palettes are verified for accessibility under
-deuteranopia, protanopia, and tritanopia. From the cherry blossoms of
-Fresh Pond to the frozen Charles River, these palettes capture
-Cambridge, MA’s natural beauty.
+Beautiful color palettes inspired by Cambridge, Massachusetts. From the
+cherry blossoms of Fresh Pond to the frozen Charles River, these
+palettes capture Cambridge, MA’s natural beauty across all four seasons.
 
 ## Quick Start
 
@@ -73,34 +70,19 @@ Palette](reference/figures/palette_winter.png)
 ![Default ggplot2 vs cambridgema
 colors](reference/figures/color_comparison.png)
 
-## Colorblind Accessibility
+## Accessibility Tools
 
-All palettes are verified for accessibility. Check any palette:
+Check color distinguishability for any palette:
 
 ``` r
-# Check accessibility
 check_colorblind("autumn")
-#> Colorblind Accessibility Check
-#> ------------------------------
-#> Status: PASS
-#> Threshold: 10
-#>
-#> Minimum color distances:
-#>   Normal vision:   18.5
-#>   Deuteranopia:    12.3 (red-green, ~6% males)
-#>   Protanopia:      11.7 (red, ~2% males)
-#>   Tritanopia:      15.2 (blue-yellow, rare)
 ```
 
-### Visualize CVD Simulation
+Visualize how a palette appears under different viewing conditions:
 
 ``` r
-# See how palettes appear under color vision deficiency
 plot_colorblind_sim("autumn")
 ```
-
-> *CVD simulation shows how palettes appear to people with deuteranopia
-> (~6% of males), protanopia (~2% of males), and tritanopia (rare).*
 
 ## Usage Examples
 
@@ -390,7 +372,7 @@ Functions for visualizing and printing palettes
 
 ### All vignettes
 
-- [Colorblind-Friendly
-  Visualization](https://xiaolong-y.github.io/cambridgema/articles/colorblind-friendly.md):
+- [cambridgema vs ggplot2 Default
+  Colors](https://xiaolong-y.github.io/cambridgema/articles/colorblind-friendly.md):
 - [Getting Started with
   cambridgema](https://xiaolong-y.github.io/cambridgema/articles/getting-started.md):

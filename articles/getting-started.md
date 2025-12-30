@@ -2,10 +2,8 @@
 
 ## Introduction
 
-The **cambridgema** package provides colorblind-friendly color palettes
-inspired by the flora and seasons of Cambridge, Massachusetts. All
-palettes are verified for accessibility under deuteranopia, protanopia,
-and tritanopia.
+The **cambridgema** package provides nature-inspired color palettes
+based on the flora and seasons of Cambridge, Massachusetts.
 
 ``` r
 library(cambridgema)
@@ -224,7 +222,7 @@ ggplot(df, aes(x, y, color = g)) +
 
 ## Next Steps
 
-- Check the **Colorblind Accessibility** vignette for CVD simulation
+- Check the **cambridgema vs ggplot2** vignette for visual comparisons
 - Explore the **Cambridge Inspiration** vignette for the story behind
   each color
 - Visit the [pkgdown site](https://xiaolong-y.github.io/cambridgema/)
