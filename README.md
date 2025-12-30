@@ -39,7 +39,7 @@ plot_cam_demo()
 ```
 
 <p align="center">
-  <img src="figures/all_palettes.png" alt="All Cambridge MA Palettes" width="700">
+  <img src="man/figures/all_palettes.png" alt="All Cambridge MA Palettes" width="700">
 </p>
 
 ### Individual Palette Cards
@@ -115,7 +115,7 @@ ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
 ```
 
 <p align="center">
-  <img src="figures/heatmap.png" alt="Heatmap with River Sequential Palette" width="600">
+  <img src="man/figures/heatmap.png" alt="Heatmap with River Sequential Palette" width="600">
 </p>
 
 ### Centered Data (Diverging Scales)
@@ -173,22 +173,22 @@ The package includes colors optimized for common statistical visualizations:
 ### Visualization Gallery
 
 <p align="center">
-  <img src="figures/forest_plot.png" alt="Forest Plot - Treatment Effects" width="400">
-  <img src="figures/roc_curve.png" alt="ROC Curve" width="400">
+  <img src="man/figures/forest_plot.png" alt="Forest Plot - Treatment Effects" width="400">
+  <img src="man/figures/roc_curve.png" alt="ROC Curve" width="400">
 </p>
 
 <p align="center">
-  <img src="figures/timeseries.png" alt="Time Series with Confidence Bands" width="600">
+  <img src="man/figures/timeseries.png" alt="Time Series with Confidence Bands" width="600">
 </p>
 
 <p align="center">
-  <img src="figures/balance_check.png" alt="Covariate Balance Check" width="400">
-  <img src="figures/variable_importance.png" alt="Variable Importance" width="400">
+  <img src="man/figures/balance_check.png" alt="Covariate Balance Check" width="400">
+  <img src="man/figures/variable_importance.png" alt="Variable Importance" width="400">
 </p>
 
 <p align="center">
-  <img src="figures/rd_plot.png" alt="Regression Discontinuity Design" width="400">
-  <img src="figures/did_plot.png" alt="Difference-in-Differences" width="400">
+  <img src="man/figures/rd_plot.png" alt="Regression Discontinuity Design" width="400">
+  <img src="man/figures/did_plot.png" alt="Difference-in-Differences" width="400">
 </p>
 
 ### Example Code

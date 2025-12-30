@@ -2,7 +2,6 @@
 ^\.github$
 ^\.Rproj\.user$
 ^.*\.Rproj$
-^figures$
 ^generate_showcase\.r$
 ^test_cantabcolors\.r$
 ^\.Rhistory$
